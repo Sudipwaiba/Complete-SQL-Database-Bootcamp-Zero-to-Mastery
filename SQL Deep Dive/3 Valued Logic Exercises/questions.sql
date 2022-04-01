@@ -6,6 +6,7 @@
 */
 SELECT address2 
 FROM customers
+where coalescec(address2, 'No Address');
 
 /*
 * DB: Store
@@ -24,4 +25,4 @@ WHERE COALESCE(address2, null) IS NOT null;
 */
 
 SELECT coalesce(lastName, 'Empty'), * from customers
-where (age = null);
+where (age = null) OR age is not null;
