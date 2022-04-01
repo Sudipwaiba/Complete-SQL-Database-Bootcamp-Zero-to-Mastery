@@ -4,7 +4,11 @@
 * Question: Get me all the employees above 60, use the appropriate date functions
 */
 
-SELECT * FROM employees;
+SELECT AGE(birth_date), * FROM employees
+WHERE (
+   EXTRACT (YEAR FROM AGE(birth_date))
+) > 60 ;
+
 
 /*
 * DB: Employees
@@ -12,7 +16,8 @@ SELECT * FROM employees;
 * Question: How many employees where hired in February?
 */
 
-SELECT * FROM employees;
+SELECT count(emp_no) FROM employees
+where EXTRACT (MONTH FROM hire_date) = 2;
 
 /*
 * DB: Employees
@@ -20,7 +25,8 @@ SELECT * FROM employees;
 * Question: How many employees were born in november?
 */
 
-SELECT * FROM employees;
+SELECT count(emp_no), * FROM employees;
+where EXTRACT(MONTH FROM birth_date)=11;
 
 /*
 * DB: Employees
@@ -28,7 +34,7 @@ SELECT * FROM employees;
 * Question: Who is the oldest employee? (Use the analytical function MAX)
 */
 
-SELECT * FROM employees;
+SELECT AGE(MAX(age)), * FROM employees;
 
 /*
 * DB: Store
@@ -36,5 +42,6 @@ SELECT * FROM employees;
 * Question: How many orders were made in January 2004?
 */
 
-SELECT * FROM orders;
-
+SELECT COUNT(orderid)
+FROM orders
+WHERE DATE_TRUNC('month', orderdate) = date '2004-01-01';
